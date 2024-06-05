@@ -1,0 +1,126 @@
+{% extends "index.html" %}
+{% block content %}
+  <!-- END nav -->
+  
+  <div class="block-31" style="position: relative;">
+    <div class="owl-carousel loop-block-31 ">
+      <div class="block-30 block-30-sm item" style="background-image: url('/static/images/bg_2.jpg');" data-stellar-background-ratio="0.5">
+        <div class="container">
+          <div class="row align-items-center justify-content-center">
+            <div class="col-md-7 text-center">
+              <h2 class="heading">Receiver Registration</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <div class="site-section">
+    <div class="container">
+      <div class="row block-9">
+        <div class="col-md-6 pr-md-5">
+          <form action="/receiver_reg/" method='POST' enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+             <label>Enter Your Name:</label>
+              <input type="text" name="name" class="form-control px-3 py-3"  required>
+            </div>
+            <div class="form-group">
+                <label>Enter Your Mail:</label>
+              <input type="email" name="email" class="form-control px-3 py-3"  required>
+            </div>
+            <div class="form-group">
+                <label>Enter Your Address:</label>
+              <input type="text" name="address" class="form-control px-3 py-3"  required>
+            </div>
+            <div class="form-group">
+              <label>Enter Your Contact No.:</label>
+              <input type="tel" name="phone" class="form-control px-3 py-3" pattern="[0-9]{10}" title="Please enter a 10-digit phone number" required>
+              <small>Format: 1234567890</small>
+          </div>
+          
+            <div class="form-group">
+                <label>Enter Your Password:</label>
+              <input type="password" name="password" class="form-control px-3 py-3"  required>
+            </div>
+            <div class="form-group">
+                <label>Enter Your Date Of Birth:</label>
+              <input type="date" name="dob" class="form-control px-3 py-3"  required>
+            </div>
+            <div class="form-group">
+                <label>Enter Your Id Number:</label>
+                <input type="text" name="id_card" class="form-control px-3 py-3" required>
+              </div>
+              <div class="form-group">
+                <label>Proof (pdf/docx):</label>
+                <input type="file" name="file" accept=".pdf, .doc, .docx" class="form-control px-3 py-3" required>
+                <small class="form-text text-muted">Maximum file size: 5MB</small>
+            </div>
+            
+            
+            
+            
+            
+            
+              <div class="form-group">
+                <label>Enter Your Account Detail(Optional)</label>
+                <input type="tel" name="account_detail" class="form-control px-3 py-3">
+              </div>  
+            <div class="form-group">
+                <label>Enter Your Gender</label>
+              <select id="volunteer-name" name="gender" class="form-control">
+                <option value="#"></option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+                      
+
+
+            <div class="form-group">
+              <input type="submit" value="Submit" class="btn btn-primary py-3 px-5">
+            </div>
+          </form>
+          {% if registration_success %}
+          <script>
+              // Display alert in a pop-up window
+              var message = "Registration successful. Please note that your login access will be granted after undergoing verification by the admin at your provided address.";
+
+              alert(message);
+      
+              // Redirect to the login page after clicking "OK"
+              window.location.href = "/login";
+          </script>
+      {% endif %}
+        </div>
+        <script>
+          document.querySelector('input[type="file"]').addEventListener('change', function() {
+              const maxFileSize = 5 * 1024 * 1024; // 5MB in bytes
+              const file = this.files[0];
+              const fileType = file.type;
+      
+              if (!['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'].includes(fileType)) {
+                  alert('Please select a valid file format (PDF or DOC/DOCX).');
+                  this.value = ''; // Clear the file input
+                  return;
+              }
+      
+              if (file.size > maxFileSize) {
+                  alert('File size exceeds the maximum allowed size (5MB). Please select a smaller file.');
+                  this.value = ''; // Clear the file input
+              }
+          });
+      </script>
+      
+        <div class="col-md-6" id="map"></div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
+
+  
+  
+  

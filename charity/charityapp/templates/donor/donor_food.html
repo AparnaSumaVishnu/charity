@@ -1,0 +1,84 @@
+{% extends "donor/donor_home.html" %}
+{% block content %}
+  <!-- END nav -->
+  
+  <div class="block-31" style="position: relative;">
+    <div class="owl-carousel loop-block-31 ">
+      <div class="block-30 block-30-sm item" style="background-image: url('/static/images/bg_2.jpg');" data-stellar-background-ratio="0.5">
+        <div class="container">
+          <div class="row align-items-center justify-content-center">
+            <div class="col-md-7 text-center">
+              <h2 class="heading">Food Donation</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <div class="site-section">
+    <div class="container">
+      <div class="row block-9">
+        <div class="col-md-6 pr-md-5">
+          <form action="" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+             <label>Food Name:</label>
+             <select id="foodName" name="name" class="form-control">
+                <option value="#">Select a food item</option>
+                <option value="Bread">Bread</option>
+                <option value="Meals">Meals</option>
+                <option value="Milk">Milk</option>
+                <option value="Egg">Egg</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="form-group" id="otherFoodItem" style="display: none;">
+                <label>Other food Item(Specify Your Food):</label>
+                <textarea name="otherfoodname" class="form-control px-3 py-3"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Quantity of Food:</label>
+                <input type="number" name="quantity" class="form-control px-3 py-3" min='1' required>
+            </div>
+            <div class="form-group">
+                <label>Expire Date:</label>
+                <input type="date" name="expire" class="form-control px-3 py-3" required>
+            </div>
+            <div class="form-group">
+              <input type="submit" value="Submit" class="btn btn-primary py-3 px-5">
+            </div>
+          </form>
+           {% if registration_success %}
+            <script>
+              var message = "Food added successful";
+              alert(message);
+              window.location.href = "/donor_home/";
+            </script>
+
+            {% else %}
+
+          {% endif %}
+        </div>
+
+        <div class="col-md-6" id="map"></div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Add event listener to the foodName dropdown
+    const foodNameDropdown = document.getElementById("foodName");
+    const otherFoodItem = document.getElementById("otherFoodItem");
+
+    foodNameDropdown.addEventListener("change", function() {
+      if (foodNameDropdown.value === "Other") {
+        otherFoodItem.style.display = "block";
+      } else {
+        otherFoodItem.style.display = "none";
+      }
+    });
+  </script>
+  {% endblock %}

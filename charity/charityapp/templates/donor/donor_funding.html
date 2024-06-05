@@ -1,0 +1,73 @@
+{% extends "donor/donor_home.html" %}
+{% block content %}
+  <!-- END nav -->
+  
+  <div class="block-31" style="position: relative;">
+    <div class="owl-carousel loop-block-31 ">
+      <div class="block-30 block-30-sm item" style="background-image: url('/static/images/bg_2.jpg');" data-stellar-background-ratio="0.5">
+        <div class="container">
+          <div class="row align-items-center justify-content-center">
+            <div class="col-md-7 text-center">
+              <h2 class="heading">Fund Donation</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <div class="site-section">
+    <div class="container">
+      <div class="row block-9">
+        <div class="col-md-6 pr-md-5">
+          <form action="/donor_funding/" method="POST">
+            {% csrf_token %}
+
+            <div class="form-group">
+              <label>Enter Your Name:</label>
+               <input type="text" name="name" class="form-control px-3 py-3"  required>
+             </div>
+             <div class="form-group">
+                 <label>Enter Your Amount</label>
+               <input type="number" name="amount" class="form-control px-3 py-3"  required>
+             </div>
+             <div class="form-group">
+                 <label>Enter The Date:</label>
+               <input type="date" name="date" class="form-control px-3 py-3"  required>
+             </div>
+             <div class="form-group">
+              <input type="submit" value="Submit" class="btn btn-primary py-3 px-5">
+            </div>
+          </form>
+          {% if registration_success %}
+          <script>
+            var message = "Fund added successful";
+            alert(message);
+            window.location.href = "/donor_home/";
+          </script>
+
+          {% else %}
+
+        {% endif %}
+        </div>
+
+        <div class="col-md-6" id="map"></div>
+      </div>
+    </div>
+  </div>
+  
+  {% comment %} <script>
+    // Add event listener to the foodName dropdown
+    const foodNameDropdown = document.getElementById("foodName");
+    const otherFoodItem = document.getElementById("otherFoodItem");
+
+    foodNameDropdown.addEventListener("change", function() {
+      if (foodNameDropdown.value === "Other") {
+        otherFoodItem.style.display = "block";
+      } else {
+        otherFoodItem.style.display = "none";
+      }
+    });
+  </script> {% endcomment %}
+  {% endblock %}

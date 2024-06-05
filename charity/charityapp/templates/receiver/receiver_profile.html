@@ -1,0 +1,104 @@
+{% extends "receiver/receiver_home.html" %}
+{% block content %}
+  <!-- END nav -->
+  
+  <div class="block-31" style="position: relative;">
+    {% for i in data %}
+    <div class="owl-carousel loop-block-31 ">
+      <div class="block-30 block-30-sm item" style="background-image: url('/static/images/bg_2.jpg');" data-stellar-background-ratio="0.5">
+        <div class="container">
+          <div class="row align-items-center justify-content-center">
+            <div class="col-md-7 text-center">
+              <h2 class="heading">Receiver Profile</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <div class="site-section">
+    <div class="container">
+      <div class="row block-9">
+        <div class="col-md-6 pr-md-5">
+          <form action="" method='POST'>
+            {% csrf_token %}
+            <div class="form-group">
+             <label>Enter Your Name:</label>
+              <input type="text" name="name" class="form-control px-3 py-3"   value="{{i.name}}" disabled>
+            </div>
+            <div class="form-group">
+                <label>Enter Your Mail:</label>
+              <input type="text" name="email" class="form-control px-3 py-3"  value="{{i.email}}" disabled>
+            </div>
+            <div class="form-group">
+                <label>Enter Your Address:</label>
+              <input type="text" name="address" class="form-control px-3 py-3"   value="{{i.address}}" disabled>
+            </div>
+            <div class="form-group">
+                <label>Enter Your Number:</label>
+              <input type="tel" name="phone" class="form-control px-3 py-3" value="{{i.phone}}" disabled>
+            </div>
+            <div class="form-group">
+                <label>Enter Your Password:</label>
+              <input type="password" name="password" class="form-control px-3 py-3"   value="{{i.password}}" disabled>
+            </div>
+            <div class="form-group">
+                <label>Enter Your Date Of Birth:</label>
+              <input type="date" name="dob" class="form-control px-3 py-3"   value="{{i.dob}}" disabled>
+            </div>
+            <div class="form-group">
+                <label>Enter Your Id Number:</label>
+                <input type="text" name="id_card" class="form-control px-3 py-3"  value="{{i.id_card}}" disabled>
+              </div>
+              <div class="form-group">
+                <label>Enter Your Proof Image:</label>
+                <img src="{{i.img.url}}" name="img" class="img-fluid">
+            </div>
+              <div class="form-group">
+                <label>Enter Your Account Detail(Optional)</label>
+                <input type="tel" name="account_detail" class="form-control px-3 py-3"  value="{{i.account_detail}}" disabled>
+              </div>  
+              <div class="form-group">
+                <label>Gender:</label>
+              <input type="text" name="gender" class="form-control px-3 py-3"  value="{{i.gender}}"  disabled>
+            </div>
+            </div>
+            </div>
+            <div class="form-group">
+              <a href="{% url 'edit_receiverprofile' id=i.id %}" class="editbtn">Edit</a>
+            </div>
+          </form>
+        
+        </div>
+
+        <div class="col-md-6" id="map"></div>
+      </div>
+    </div>
+    {%endfor%}
+  </div>
+
+  <style>
+    .editbtn{  
+      background: #f7ca44;
+      border: 2px solid #f7ca44;
+      color: #fff;
+      text-transform: uppercase;
+      border-radius: 6px;
+      padding: 3px 7px 2px 8px;
+      font-size: 15px;
+      font-weight: 500;
+    }
+    .editbtn:hover{
+      text-decoration: none;
+      color: #ffffff;
+      background-color: #e5ae0a9c;
+    }
+</style>
+  {% endblock %}
+
+
+  
+  
+  

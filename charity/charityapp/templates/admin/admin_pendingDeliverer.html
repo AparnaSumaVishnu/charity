@@ -1,0 +1,59 @@
+{% extends 'admin/admin_home.html' %}
+{% block content %}
+
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 600px;">
+            <h1 class="text-primary mb-5"><span class="fw-light text-dark"></span></h1>
+        </div>
+        <div class="row g-25">
+            <div class="col-lg-30 wow fadeIn" data-wow-delay="0.1s">
+                <div class="wow fadeIn" data-wow-delay="0.3s">
+                    <form action="" method="post">
+                        <h1 style="color: #007bff; font-size: 2.5em; font-weight: bold; text-align: center; margin-bottom: 20px;">Pending...!</h1>
+
+                        {% csrf_token %}
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Sl.No.</th>
+                                        <th>Deliverer Name</th>
+                                        <th>Receiver Name</th>
+                                        <th>Deliverer Email</th>
+                                        <th>Deliverer Address</th>
+                                        <th>Contact Number</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for data_item in user_data %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>{{ data_item.deliverer_instance.name }}</td>
+                                        <td>{{ data_item.receiver_instance.name|default:'N/A' }}</td>
+                                        <td>{{ data_item.deliverer_instance.email }}</td>
+                                        <td>{{ data_item.deliverer_instance.address }}</td>
+                                        <td>{{ data_item.deliverer_instance.phone }}</td>
+                                        <td>
+                                            <a href="/admin_alocateDeliverer/?id={{data_item.deliverer_instance.id}}" class="btn btn-primary btn-sm" onclick="return confirmAction('Allocate')">Allocate</a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function confirmAction(action) {
+        return confirm(`Are you sure you want to ${action.toLowerCase()}?`);
+    }
+</script>
+
+{% endblock %}

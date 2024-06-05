@@ -1,0 +1,121 @@
+{% extends 'receiver/receiver_home.html' %}
+{% block content %}
+<div class="block-31" style="position: relative;">
+    <div class="owl-carousel loop-block-31 ">
+      <div class="block-30 block-30-sm item" style="background-image: url('/static/images/bg_2.jpg');" data-stellar-background-ratio="0.5">
+        <div class="container">
+          <div class="row align-items-center justify-content-center">
+            <div class="col-md-7 text-center">
+              <h2 class="heading">Buy Medical Products </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 600px;">
+            <h1 class="text-primary mb-5"><span class="fw-light text-dark"></span></h1>
+        </div>
+        <div class="row g-25">
+            <div class="col-lg-30 wow fadeIn" data-wow-delay="0.1s">
+                <div class="wow fadeIn" data-wow-delay="0.3s">
+                    <form action="/receiver_buyMedicine/" method="post">
+                                                
+                        {% csrf_token %}
+                        <table class="table" border="1" style="color: rgb(255, 255, 255);">
+                            <thead>
+                                <tr>
+                                    <th>Sl.No.</th>
+                                    <th>Name       </th>
+                                    {% comment %} <th> Contact Number </th>
+                                     <th>Email</th>
+                                     <th>Approval</th>
+ {% endcomment %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for x in data %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{x.name}}</td>
+                                    <td>
+                                        <form method="post" action="/receiver_buyMedicine/">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="id" value="{{ x.id }}">
+                                            <input type="hidden" name="donor_id" value="{{ x.donor_id.id }}">
+                                            <input type="number" name="quantity" min=1 placeholder="Enter quantity">
+                                            <input type="submit" value="Buy" class="btn btn-primary py-1 px-3">
+                                        </form>
+                                    </td>
+                                    {% comment %} <td>{{x.phone}}</td>
+                                    <td>{{x.email}}</td> {% endcomment %}
+                                    {% comment %} <td><a href="" class="btn btn-primary w-55 py-6">Buy</a></td> {% endcomment %}
+                                   
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    // Check if there is an alert message
+    var alertMessage = "{{ alert_message }}";
+
+    // If there is an alert message, show it
+    if (alertMessage) {
+        // Show the alert message
+        alert(alertMessage);
+
+        // Go back two pages in the browser history after clicking "OK"
+        window.history.go(-2);
+    }
+</script>
+
+<style>
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 30px;
+        background-color: #f2f6e9;
+    }
+
+    .table th, .table td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: left;
+        color: #000; /* Set the text color to black */
+    }
+
+    .table th {
+        background-color: #545454;
+        color: #fff; /* Set the text color for table headers */
+    }
+
+    .table tbody tr:nth-child(odd) {
+        background-color: #f2f2f2;
+    }
+
+    .table tbody tr:nth-child(even) {
+        background-color: #e0e0e0;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+</style>
+
+
+{% endblock %}
